@@ -78,7 +78,8 @@ class PGNLoaderApp:
         with open(output_file, 'w', encoding='utf-8') as outfile:
             for index, pgn_file in enumerate(pgn_files):
                 with open(pgn_file, 'r', encoding='utf-8', errors='ignore') as infile:
-                    outfile.write(infile.read() + "\n")
+                    # Add a newline before the content of each file
+                    outfile.write('\n' + infile.read() + '\n')
                 self.progress['value'] += 1
                 percentage_joined = (index + 1) / len(pgn_files) * 100
                 self.progress_label.config(text=f"Merging... {int(percentage_joined)}%")
@@ -123,4 +124,3 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = PGNLoaderApp(root)
     root.mainloop()
-
